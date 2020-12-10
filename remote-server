@@ -1,0 +1,21 @@
+#!/usr/bin/expect
+
+
+set USER_NAME "root"
+set PWD "shiyuan2016!"
+set ADDRESS "12.168.1.101"
+
+# set time out
+set time 30
+
+spawn ssh $USER_NAME@$ADDRESS
+
+expect {
+   "(yes/no)?" {send "yes\n";exp_continue }
+   "*password:" {send "$PWD\n"}
+   expect eof
+}
+
+send "cd /home/$USER_NAME\n"
+
+interact 
